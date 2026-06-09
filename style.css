@@ -58,7 +58,7 @@ section {
 
 #hero {
     text-align: center;
-    background: linear-gradient(135deg, #55e2e9 0%, #006ca5 100%);
+    background: linear-gradient(135deg, #006ca5 0%, #55e2e9 100%);
     color: #fff;
     padding: 4rem 2rem;
     border-radius: 8px;
@@ -91,9 +91,11 @@ img {
     flex-direction: column;
 }
 .tall {
-    background: linear-gradient(135deg, #55e2e9 0%, #006ca5 100%);
+    background: linear-gradient(135deg, #006ca5 0%, #55e2e9 100%);
     backdrop-filter: blur(10px);
-    border-top: 1px solid rgba(52, 152, 219, 0.2);
+    width: 600px;
+    height: 600px;
+    border-radius: 10%;
     animation: fadeUp 1s 0.4s cubic-bezier(.22,1,.36,1) both;
 }
 .short {
