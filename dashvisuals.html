@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project 3: Data Analysis Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link rel="stylesheet" href="dashvisuals.css">
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="brand-dot"></div>
+    <span class="brand-name">data<span>_</span>dashboard</span>
+  </div>
+  <span class="topbar-meta">Q4 2024 · Sales Analytics</span>
+  <span class="status-badge">● live</span>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="project-tag">Project 3</div>
+  <h1>Data Analysis <em>Dashboard</em></h1>
+  <p class="hero-desc">A responsive sales analytics dashboard built with Python and Plotly. Visualizes revenue trends, regional performance, product breakdown, and top customer data in real time.</p>
+  <div class="tech-stack">
+    <span class="tech-pill highlight">Python 3.11</span>
+    <span class="tech-pill highlight">Plotly 5.x</span>
+    <span class="tech-pill highlight">Pandas</span>
+    <span class="tech-pill">NumPy</span>
+    <span class="tech-pill">Dash</span>
+    <span class="tech-pill">SQLite</span>
+    <span class="tech-pill">Responsive</span>
+  </div>
+</div>
+
+<!-- DIVIDER -->
+<div class="section-divider"><span>// live preview</span></div>
+
+<!-- DASHBOARD -->
+<div class="dashboard">
+
+  <!-- KPI CARDS -->
+  <div class="kpi-grid">
+    <div class="kpi-card green">
+      <div class="kpi-label">Total Revenue</div>
+      <div class="kpi-value">$2.84M</div>
+      <div class="kpi-change up">▲ 18.4% vs last quarter</div>
+    </div>
+    <div class="kpi-card blue">
+      <div class="kpi-label">Orders</div>
+      <div class="kpi-value">14,372</div>
+      <div class="kpi-change up">▲ 9.1% vs last quarter</div>
+    </div>
+    <div class="kpi-card orange">
+      <div class="kpi-label">Avg. Order Value</div>
+      <div class="kpi-value">$197.5</div>
+      <div class="kpi-change up">▲ 5.6% vs last quarter</div>
+    </div>
+    <div class="kpi-card purple">
+      <div class="kpi-label">Churn Rate</div>
+      <div class="kpi-value">3.2%</div>
+      <div class="kpi-change down">▼ 1.1% improvement</div>
+    </div>
+  </div>
+
+  <!-- MAIN CHARTS -->
+  <div class="chart-grid">
+    <div class="chart-card">
+      <div class="chart-header">
+        <div>
+          <div class="chart-title">Monthly Revenue</div>
+          <div class="chart-subtitle">Jan – Dec 2024</div>
+        </div>
+        <span class="chart-badge green">+18.4% YoY</span>
+      </div>
+      <div class="chart-canvas-wrap">
+        <canvas id="revenueChart" height="200"></canvas>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-header">
+        <div>
+          <div class="chart-title">Sales by Region</div>
+          <div class="chart-subtitle">Q4 2024</div>
+        </div>
+        <span class="chart-badge blue">4 regions</span>
+      </div>
+      <div class="chart-canvas-wrap">
+        <canvas id="regionChart" height="200"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM CHARTS -->
+  <div class="chart-grid-bottom">
+    <div class="chart-card">
+      <div class="chart-header">
+        <div>
+          <div class="chart-title">Product Category Breakdown</div>
+          <div class="chart-subtitle">% of total revenue</div>
+        </div>
+        <span class="chart-badge orange">Q4 2024</span>
+      </div>
+      <div class="chart-canvas-wrap">
+        <canvas id="categoryChart" height="210"></canvas>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-header">
+        <div>
+          <div class="chart-title">Weekly Orders Volume</div>
+          <div class="chart-subtitle">Last 8 weeks</div>
+        </div>
+        <span class="chart-badge green">Current quarter</span>
+      </div>
+      <div class="chart-canvas-wrap">
+        <canvas id="ordersChart" height="210"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- TABLE -->
+  <div class="table-card">
+    <div class="table-head">
+      <div>
+        <div class="chart-title">Top Customers</div>
+        <div class="chart-subtitle" style="margin-top:2px">Ranked by revenue contribution</div>
+      </div>
+      <span class="chart-badge blue">Top 6</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Customer</th>
+          <th>Region</th>
+          <th>Revenue</th>
+          <th>Orders</th>
+          <th>Share</th>
+          <th>Trend</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="td-mono td-muted">01</td>
+          <td>Apex Solutions Ltd</td>
+          <td class="td-muted">North America</td>
+          <td class="td-mono">$312,400</td>
+          <td class="td-mono">248</td>
+          <td>
+            <div class="bar-cell">
+              <div class="mini-bar-track"><div class="mini-bar" style="width:100%"></div></div>
+              <span class="td-mono" style="font-size:0.7rem;color:var(--muted)">11%</span>
+            </div>
+          </td>
+          <td><span class="trend-up">▲ 22%</span></td>
+        </tr>
+        <tr>
+          <td class="td-mono td-muted">02</td>
+          <td>Meridian Group</td>
+          <td class="td-muted">Europe</td>
+          <td class="td-mono">$287,600</td>
+          <td class="td-mono">204</td>
+          <td>
+            <div class="bar-cell">
+              <div class="mini-bar-track"><div class="mini-bar" style="width:92%"></div></div>
+              <span class="td-mono" style="font-size:0.7rem;color:var(--muted)">10%</span>
+            </div>
+          </td>
+          <td><span class="trend-up">▲ 14%</span></td>
+        </tr>
+        <tr>
+          <td class="td-mono td-muted">03</td>
+          <td>Orbit Technologies</td>
+          <td class="td-muted">Asia-Pacific</td>
+          <td class="td-mono">$241,200</td>
+          <td class="td-mono">189</td>
+          <td>
+            <div class="bar-cell">
+              <div class="mini-bar-track"><div class="mini-bar" style="width:77%"></div></div>
+              <span class="td-mono" style="font-size:0.7rem;color:var(--muted)">8.5%</span>
+            </div>
+          </td>
+          <td><span class="trend-up">▲ 8%</span></td>
+        </tr>
+        <tr>
+          <td class="td-mono td-muted">04</td>
+          <td>Cascade Industries</td>
+          <td class="td-muted">North America</td>
+          <td class="td-mono">$198,900</td>
+          <td class="td-mono">162</td>
+          <td>
+            <div class="bar-cell">
+              <div class="mini-bar-track"><div class="mini-bar" style="width:64%"></div></div>
+              <span class="td-mono" style="font-size:0.7rem;color:var(--muted)">7%</span>
+            </div>
+          </td>
+          <td><span class="trend-down">▼ 3%</span></td>
+        </tr>
+        <tr>
+          <td class="td-mono td-muted">05</td>
+          <td>Solara Ventures</td>
+          <td class="td-muted">Latin America</td>
+          <td class="td-mono">$174,500</td>
+          <td class="td-mono">138</td>
+          <td>
+            <div class="bar-cell">
+              <div class="mini-bar-track"><div class="mini-bar" style="width:56%"></div></div>
+              <span class="td-mono" style="font-size:0.7rem;color:var(--muted)">6.1%</span>
+            </div>
+          </td>
+          <td><span class="trend-up">▲ 31%</span></td>
+        </tr>
+        <tr>
+          <td class="td-mono td-muted">06</td>
+          <td>Vantage Systems</td>
+          <td class="td-muted">Europe</td>
+          <td class="td-mono">$155,300</td>
+          <td class="td-mono">121</td>
+          <td>
+            <div class="bar-cell">
+              <div class="mini-bar-track"><div class="mini-bar" style="width:50%"></div></div>
+              <span class="td-mono" style="font-size:0.7rem;color:var(--muted)">5.5%</span>
+            </div>
+          </td>
+          <td><span class="trend-up">▲ 7%</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- CODE SNIPPET -->
+  <div class="section-divider" style="margin-top:2.5rem"><span>// source code</span></div>
+
+  <div class="code-section">
+    <div class="code-card">
+      <div class="code-bar">
+        <div class="code-bar-left">
+          <div class="dot r"></div>
+          <div class="dot y"></div>
+          <div class="dot g"></div>
+          <span class="code-filename">dashboard.py</span>
+        </div>
+        <span style="font-family:var(--mono);font-size:0.65rem;color:var(--muted)">Python · Plotly · Dash</span>
+      </div>
+      <pre><span class="kw">import</span> <span class="cl">pandas</span> <span class="kw">as</span> pd
+<span class="kw">import</span> <span class="cl">plotly.express</span> <span class="kw">as</span> px
+<span class="kw">import</span> <span class="cl">plotly.graph_objects</span> <span class="kw">as</span> go
+<span class="kw">from</span> <span class="cl">dash</span> <span class="kw">import</span> Dash, dcc, html, Input, Output
+
+<span class="cm"># Load and preprocess sales data</span>
+<span class="fn">df</span> = pd.<span class="fn">read_csv</span>(<span class="st">'sales_data.csv'</span>, parse_dates=[<span class="st">'date'</span>])
+<span class="fn">df</span>[<span class="st">'month'</span>] = df[<span class="st">'date'</span>].<span class="fn">dt.to_period</span>(<span class="st">'M'</span>)
+
+<span class="cm"># Aggregate monthly revenue</span>
+<span class="fn">monthly</span> = df.<span class="fn">groupby</span>(<span class="st">'month'</span>)[<span class="st">'revenue'</span>].<span class="fn">sum</span>().<span class="fn">reset_index</span>()
+
+<span class="cm"># Build Plotly figure</span>
+<span class="fn">fig</span> = px.<span class="fn">line</span>(
+    monthly,
+    x=<span class="st">'month'</span>, y=<span class="st">'revenue'</span>,
+    title=<span class="st">'Monthly Revenue — 2024'</span>,
+    template=<span class="st">'plotly_dark'</span>,
+    line_shape=<span class="st">'spline'</span>
+)
+fig.<span class="fn">update_traces</span>(line_color=<span class="st">'#3FB68B'</span>, line_width=<span class="nm">2.5</span>)
+
+<span class="cm"># KPI cards callback</span>
+<span class="op">@</span>app.<span class="fn">callback</span>(
+    Output(<span class="st">'kpi-revenue'</span>, <span class="st">'children'</span>),
+    Input(<span class="st">'region-filter'</span>, <span class="st">'value'</span>)
+)
+<span class="kw">def</span> <span class="fn">update_kpi</span>(region):
+    filtered = df[df[<span class="st">'region'</span>] == region] <span class="kw">if</span> region <span class="kw">else</span> df
+    <span class="kw">return</span> <span class="fn">f</span><span class="st">"${filtered['revenue'].sum():,.0f}"</span>
+
+<span class="kw">if</span> __name__ == <span class="st">'__main__'</span>:
+    app.<span class="fn">run_server</span>(debug=<span class="kw">True</span>, port=<span class="nm">8050</span>)</pre>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Project 3 · Data Analysis Dashboard &nbsp;·&nbsp; <span>Python + Plotly</span> &nbsp;·&nbsp; Q4 2024
+  <p>Go back to <a href="index.html">index file</a></p>
+</footer>
+
+<script>
+const mono = getComputedStyle(document.documentElement).getPropertyValue('--mono').trim() || 'monospace';
+Chart.defaults.font.family = "'IBM Plex Mono', monospace";
+Chart.defaults.color = '#7D8FA1';
+
+const gridColor = 'rgba(42,50,64,0.8)';
+
+// Revenue Line Chart
+new Chart(document.getElementById('revenueChart'), {
+  type: 'line',
+  data: {
+    labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+    datasets: [{
+      data: [182000,210000,197000,235000,261000,244000,278000,295000,312000,289000,331000,354000],
+      borderColor: '#3FB68B',
+      backgroundColor: 'rgba(63,182,139,0.08)',
+      borderWidth: 2,
+      pointRadius: 3,
+      pointBackgroundColor: '#3FB68B',
+      tension: 0.4,
+      fill: true
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { grid: { color: gridColor }, ticks: { font: { size: 10 } } },
+      y: {
+        grid: { color: gridColor },
+        ticks: {
+          font: { size: 10 },
+          callback: v => '$' + (v/1000).toFixed(0) + 'k'
+        }
+      }
+    }
+  }
+});
+
+// Region Donut
+new Chart(document.getElementById('regionChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['North America','Europe','Asia-Pacific','Latin America'],
+    datasets: [{
+      data: [38, 29, 22, 11],
+      backgroundColor: ['#3FB68B','#58A6FF','#F0883E','#BC8CFF'],
+      borderColor: '#161B22',
+      borderWidth: 3,
+      hoverOffset: 6
+    }]
+  },
+  options: {
+    responsive: true,
+    cutout: '68%',
+    plugins: {
+      legend: {
+        position: 'bottom',
+        labels: { font: { size: 10 }, padding: 14, boxWidth: 10, boxHeight: 10 }
+      }
+    }
+  }
+});
+
+// Category Bar
+new Chart(document.getElementById('categoryChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Software','Hardware','Services','Consulting','Support'],
+    datasets: [{
+      data: [34, 24, 19, 14, 9],
+      backgroundColor: ['#58A6FF','#3FB68B','#F0883E','#BC8CFF','rgba(88,166,255,0.35)'],
+      borderRadius: 5,
+      borderSkipped: false
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { grid: { display: false }, ticks: { font: { size: 10 } } },
+      y: {
+        grid: { color: gridColor },
+        ticks: { font: { size: 10 }, callback: v => v + '%' }
+      }
+    }
+  }
+});
+
+// Weekly Orders
+new Chart(document.getElementById('ordersChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Wk 1','Wk 2','Wk 3','Wk 4','Wk 5','Wk 6','Wk 7','Wk 8'],
+    datasets: [{
+      data: [380, 420, 395, 460, 510, 488, 543, 571],
+      backgroundColor: 'rgba(88,166,255,0.25)',
+      borderColor: '#58A6FF',
+      borderWidth: 1.5,
+      borderRadius: 4,
+      borderSkipped: false
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { grid: { display: false }, ticks: { font: { size: 10 } } },
+      y: { grid: { color: gridColor }, ticks: { font: { size: 10 } } }
+    }
+  }
+});
+</script>
+</body>
+</html>
