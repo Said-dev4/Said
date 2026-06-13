@@ -9,7 +9,8 @@ body {
     line-height: 1.6;
     color: #333;
     background-color: #fff;
-    padding: 20px;
+    padding: 0;
+    overflow-x: hidden;
 }
 
 header {
@@ -49,8 +50,8 @@ header nav a:hover {
 
 section {
     max-width: 1200px;
-    margin: 3rem auto;
-    padding: 2rem;
+    margin: 2rem auto;
+    padding: 1.5rem;
     background: white;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -60,9 +61,9 @@ section {
     text-align: center;
     background: linear-gradient(135deg, #006ca5 0%, #55e2e9 100%);
     color: #fff;
-    padding: 4rem 2rem;
+    padding: 3rem 1.5rem;
     border-radius: 8px;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -123,7 +124,7 @@ img {
 
 section h2 {
     color: #006ca5;
-    font-size: 2rem;
+    font-size: clamp(1.4rem, 4vw, 2rem);
     margin-bottom: 1.5rem;
     border-bottom: 3px solid #02367B;
     padding-bottom: 0.5rem;
@@ -203,7 +204,7 @@ footer a:hover {
 
 @media (max-width: 768px) {
     body {
-        padding: 12px;
+        padding: 0;
     }
 
     header h1 {
@@ -217,13 +218,17 @@ footer a:hover {
     }
 
     section {
-        margin: 1.25rem auto;
-        padding: 1.25rem;
+        margin: 1rem auto;
+        padding: 1rem;
     }
 
     #hero {
-        padding-left: 0;
-        padding-right: 0;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .wrapper {
+        flex-direction: column;
     }
 
     .projects-container {
